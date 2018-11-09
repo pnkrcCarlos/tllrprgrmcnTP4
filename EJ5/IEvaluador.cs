@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace EJ5
 {
-    interface IEvaluador
+    public interface IEvaluador
     {
+        /// <summary>
+        /// Retorna si una solicitud es o no válida.
+        /// </summary>
+        /// <param name="pSolicitud">Solicitud a evaluar.</param>
+        /// <returns>bool</returns>
         bool EsValida(SolicitudPrestamo pSolicitud);
     }
 }

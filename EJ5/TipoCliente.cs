@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EJ5
 {
-    enum TipoCliente
+    public enum TipoCliente
     {
        NoCliente,
        Cliente,

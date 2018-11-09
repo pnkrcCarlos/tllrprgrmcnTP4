@@ -6,18 +6,32 @@ using System.Threading.Tasks;
 
 namespace EJ5
 {
-    class CalculoTemporal
+    public class CalculoTemporal
     {
+        private const int meses = 12;
+
+        /// <summary>
+        /// Retorna la diferencia de meses entre una fecha y otra.
+        /// </summary>
+        /// <param name="pDesde">Fecha desde la cual se calcula la diferencia.</param>
+        /// <param name="pHasta">Fecha hasta la cual se calcula la diferencia.</param>
+        /// <returns></returns>
         public static int DiferenciaMensual(DateTime pDesde, DateTime pHasta)
         {
-            int m = (pHasta.Year * 12 + pHasta.Month) - (pDesde.Year * 12 + pDesde.Month);
+            int m = Math.Abs((pHasta.Year * meses + pHasta.Month) - (pDesde.Year * meses + pDesde.Month));
             if (pHasta.Day < pDesde.Day) { m--; }
             return m;
         }
 
+        /// <summary>
+        /// Retorna la diferencia de años entre una fecha y otra.
+        /// </summary>
+        /// <param name="pDesde">Fecha desde la cual se calcula la diferencia.</param>
+        /// <param name="pHasta">Fecha hasta la cual se calcula la diferencia.</param>
+        /// <returns></returns>
         public static int DiferenciaAnual(DateTime pDesde, DateTime pHasta)
         {
-            int a = pHasta.Year - pDesde.Year;
+            int a = Math.Abs(pHasta.Year - pDesde.Year);
             if (pHasta.Month < pDesde.Month || pHasta.Day < pDesde.Day) { a--; }
             return a;
         }

@@ -6,55 +6,82 @@ using System.Threading.Tasks;
 
 namespace EJ5
 {
-    class GestorPrestamos
+    public class GestorPrestamos
     {
+        private static GestorPrestamos cInstancia;
+
         private static IEvaluador EV_EDAD = new EvaluadorEdad(18, 75);
         private static IEvaluador EV_ANTIGUEDAD = new EvaluadorAntiguedadLaboral(6);
         private static IEvaluador EV_SUELDO = new EvaluadorSueldo(5000);
 
         private Dictionary<TipoCliente, EvaluadorCompuesto> iEvaluadoresPorCliente;
 
-        public GestorPrestamos()
+        private GestorPrestamos()
         {
             // Inicializar
             this.iEvaluadoresPorCliente = new Dictionary<TipoCliente, EvaluadorCompuesto>();
 
             // Evaluadores para NoCliente
-            this.iEvaluadoresPorCliente.Add(TipoCliente.NoCliente, new EvaluadorCompuesto());
-            this.iEvaluadoresPorCliente[TipoCliente.NoCliente].AgregarEvaluador(EV_EDAD);
-            this.iEvaluadoresPorCliente[TipoCliente.NoCliente].AgregarEvaluador(EV_ANTIGUEDAD);
-            this.iEvaluadoresPorCliente[TipoCliente.NoCliente].AgregarEvaluador(EV_SUELDO);
-            this.iEvaluadoresPorCliente[TipoCliente.NoCliente].AgregarEvaluador(new EvaluadorMonto(20000));
-            this.iEvaluadoresPorCliente[TipoCliente.NoCliente].AgregarEvaluador(new EvaluadorCantidadCuotas(12));
+            EvaluadorCompuesto evNoCliente = new EvaluadorCompuesto();
+            evNoCliente.AgregarEvaluador(EV_EDAD);
+            evNoCliente.AgregarEvaluador(EV_ANTIGUEDAD);
+            evNoCliente.AgregarEvaluador(EV_SUELDO);
+            evNoCliente.AgregarEvaluador(new EvaluadorMonto(20000));
+            evNoCliente.AgregarEvaluador(new EvaluadorCantidadCuotas(12));
+            this.iEvaluadoresPorCliente.Add(TipoCliente.NoCliente, evNoCliente);
 
             // Evaluadores para Cliente
-            this.iEvaluadoresPorCliente.Add(TipoCliente.Cliente, new EvaluadorCompuesto());
-            this.iEvaluadoresPorCliente[TipoCliente.Cliente].AgregarEvaluador(EV_EDAD);
-            this.iEvaluadoresPorCliente[TipoCliente.Cliente].AgregarEvaluador(EV_ANTIGUEDAD);
-            this.iEvaluadoresPorCliente[TipoCliente.Cliente].AgregarEvaluador(EV_SUELDO);
-            this.iEvaluadoresPorCliente[TipoCliente.Cliente].AgregarEvaluador(new EvaluadorMonto(100000));
-            this.iEvaluadoresPorCliente[TipoCliente.Cliente].AgregarEvaluador(new EvaluadorCantidadCuotas(32));
+            EvaluadorCompuesto evCliente = new EvaluadorCompuesto();
+            evCliente.AgregarEvaluador(EV_EDAD);
+            evCliente.AgregarEvaluador(EV_ANTIGUEDAD);
+            evCliente.AgregarEvaluador(EV_SUELDO);
+            evCliente.AgregarEvaluador(new EvaluadorMonto(100000));
+            evCliente.AgregarEvaluador(new EvaluadorCantidadCuotas(32));
+            this.iEvaluadoresPorCliente.Add(TipoCliente.Cliente, evCliente);
 
             // Evaluadores para ClienteGold
-            this.iEvaluadoresPorCliente.Add(TipoCliente.ClienteGold, new EvaluadorCompuesto());
-            this.iEvaluadoresPorCliente[TipoCliente.ClienteGold].AgregarEvaluador(EV_EDAD);
-            this.iEvaluadoresPorCliente[TipoCliente.ClienteGold].AgregarEvaluador(EV_ANTIGUEDAD);
-            this.iEvaluadoresPorCliente[TipoCliente.ClienteGold].AgregarEvaluador(EV_SUELDO);
-            this.iEvaluadoresPorCliente[TipoCliente.ClienteGold].AgregarEvaluador(new EvaluadorMonto(150000));
-            this.iEvaluadoresPorCliente[TipoCliente.ClienteGold].AgregarEvaluador(new EvaluadorCantidadCuotas(60));
+            EvaluadorCompuesto evClienteGold = new EvaluadorCompuesto();
+            evClienteGold.AgregarEvaluador(EV_EDAD);
+            evClienteGold.AgregarEvaluador(EV_ANTIGUEDAD);
+            evClienteGold.AgregarEvaluador(EV_SUELDO);
+            evClienteGold.AgregarEvaluador(new EvaluadorMonto(150000));
+            evClienteGold.AgregarEvaluador(new EvaluadorCantidadCuotas(60));
+            this.iEvaluadoresPorCliente.Add(TipoCliente.ClienteGold, evClienteGold);
 
             // Evaluadores para ClientePlatinum
-            this.iEvaluadoresPorCliente.Add(TipoCliente.ClientePlatinum, new EvaluadorCompuesto());
-            this.iEvaluadoresPorCliente[TipoCliente.ClientePlatinum].AgregarEvaluador(EV_EDAD);
-            this.iEvaluadoresPorCliente[TipoCliente.ClientePlatinum].AgregarEvaluador(EV_ANTIGUEDAD);
-            this.iEvaluadoresPorCliente[TipoCliente.ClientePlatinum].AgregarEvaluador(EV_SUELDO);
-            this.iEvaluadoresPorCliente[TipoCliente.ClientePlatinum].AgregarEvaluador(new EvaluadorMonto(200000));
-            this.iEvaluadoresPorCliente[TipoCliente.ClientePlatinum].AgregarEvaluador(new EvaluadorCantidadCuotas(60));
+            EvaluadorCompuesto evClientePlatinum = new EvaluadorCompuesto();
+            
+            evClientePlatinum.AgregarEvaluador(EV_EDAD);
+            evClientePlatinum.AgregarEvaluador(EV_ANTIGUEDAD);
+            evClientePlatinum.AgregarEvaluador(EV_SUELDO);
+            evClientePlatinum.AgregarEvaluador(new EvaluadorMonto(200000));
+            evClientePlatinum.AgregarEvaluador(new EvaluadorCantidadCuotas(60));
+            this.iEvaluadoresPorCliente.Add(TipoCliente.ClientePlatinum, evClientePlatinum);
         }
 
+        /// <summary>
+        /// Retorna si una solicitud es o no válida.
+        /// </summary>
+        /// <param name="pSolicitud">Solicitud a evaluar.</param>
+        /// <returns>bool</returns>
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
             return this.iEvaluadoresPorCliente[pSolicitud.Cliente.TipoCliente].EsValida(pSolicitud);
+        }
+
+        /// <summary>
+        /// Devuelve la instancia de GestorPrestamos
+        /// </summary>
+        public static GestorPrestamos Instancia
+        {
+            get
+            {
+                if (cInstancia == null)
+                {
+                    cInstancia = new GestorPrestamos();
+                }
+                return cInstancia;
+            }
         }
     }
 }

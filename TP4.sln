@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJ5", "EJ5\EJ5.csproj", "{90B1CFAA-C6CA-4FD9-A3A9-D87CBCB72A91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSolicitudes", "TestSolicitudes\TestSolicitudes.csproj", "{1FA858A3-0910-444B-A721-87DCD6247093}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{90B1CFAA-C6CA-4FD9-A3A9-D87CBCB72A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90B1CFAA-C6CA-4FD9-A3A9-D87CBCB72A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90B1CFAA-C6CA-4FD9-A3A9-D87CBCB72A91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FA858A3-0910-444B-A721-87DCD6247093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FA858A3-0910-444B-A721-87DCD6247093}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FA858A3-0910-444B-A721-87DCD6247093}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FA858A3-0910-444B-A721-87DCD6247093}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
